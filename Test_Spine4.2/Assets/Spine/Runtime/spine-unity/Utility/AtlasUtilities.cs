@@ -34,6 +34,7 @@
 
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 
@@ -354,6 +355,8 @@ namespace Spine.Unity.AttachmentTools
 			// Use these to detect and use shared regions.
 			existingRegions.Clear();
 			regionIndices.Clear();
+			listPackedTextures.Clear();
+			listAtlasRegionPackedTextures.Clear();
 
 			// Collect all textures from original attachments.
 			int numTextureParamsToRepack = 1 + (additionalTexturePropertyIDsToCopy == null ? 0 : additionalTexturePropertyIDsToCopy.Length);
@@ -461,6 +464,9 @@ namespace Spine.Unity.AttachmentTools
 				}
 				newTexture.name = newAssetName;
 				Rect[] rectsForTexParam = newTexture.PackTextures(texturesToPack.ToArray(), padding, maxAtlasSize);
+				newTexture.Compress(true);
+				newTexture.wrapMode = TextureWrapMode.Repeat;
+				newTexture.Apply(false, true);
 				if (i == 0)
 				{
 					rects = rectsForTexParam;
@@ -478,11 +484,48 @@ namespace Spine.Unity.AttachmentTools
 			page.name = newAssetName;
 
 			repackedRegions.Clear();
+			// for (int i = 0, n = originalRegions.Count; i < n; i++) {
+			// 	AtlasRegion oldRegion = originalRegions[i];
+			// 	AtlasRegion newRegion = UVRectToAtlasRegion(rects[i], oldRegion, page);
+			// 	repackedRegions.Add(newRegion);
+			// }
+
+			
 			for (int i = 0, n = originalRegions.Count; i < n; i++)
 			{
-				AtlasRegion oldRegion = originalRegions[i];
-				AtlasRegion newRegion = UVRectToAtlasRegion(rects[i], oldRegion, page);
+				var region = originalRegions[i];
+				var mainTexture = listAtlasRegionPackedTextures[region];
+				var indexTexture = listPackedTextures.IndexOf(mainTexture);
+				var rect = rects[indexTexture];
+
+				var texX = rect.x;
+				var texY = page.height - (page.height  * rect.height); 
+
+				var widthScale =  (page.width * rect.width) / (float)mainTexture.width;
+				var heightScale = (page.height * rect.height) / (float)mainTexture.height;
+
+				AtlasRegion oldRegion = region;
+				AtlasRegion newRegion = oldRegion.Clone();
+				newRegion.index = -1;
+				newRegion.page = page;
+
+				newRegion.width = (int)(oldRegion.width * widthScale);
+				newRegion.height = (int)(oldRegion.height * heightScale);
+				newRegion.originalWidth = (int)(oldRegion.originalWidth * widthScale);
+				newRegion.originalHeight = (int)(oldRegion.originalHeight * heightScale);
+
+
+				newRegion.x = (int)(rect.x * page.width)  + (int)math.remap(0, mainTexture.width, texX, texX + (mainTexture.width * widthScale), oldRegion.x);
+				newRegion.y = (int)( (1 - rect.y) * page.height) + (int)math.remap(0, mainTexture.height, texY, texY + (mainTexture.height * heightScale), oldRegion.y);
+
+
+				newRegion.u = newRegion.x / (float)page.width;
+				newRegion.v = 1 - newRegion.y / (float)page.height;
+				newRegion.u2 = newRegion.u + newRegion.width / (float)page.width;
+				newRegion.v2 = newRegion.v - newRegion.height / (float)page.height;
+
 				repackedRegions.Add(newRegion);
+				
 			}
 
 			// Map the cloned attachments to the repacked atlas.
@@ -513,12 +556,40 @@ namespace Spine.Unity.AttachmentTools
 				}
 			}
 
+			
+
+			
 			// Clean up.
 			if (clearCache)
 				AtlasUtilities.ClearCache();
 
 			outputMaterial = newMaterial;
 		}
+
+		public static void ClearSpineCache()
+		{
+			listPackedTextures.Clear();
+			listAtlasRegionPackedTextures.Clear();
+
+			for (int i = 0; i < texturesToPackAtParam.Length; i++)
+			{
+				texturesToPackAtParam[i].Clear();
+			}
+			existingRegions.Clear();
+			regionIndices.Clear();
+			originalRegions.Clear();
+			repackedRegions.Clear();
+			inoutAttachments.Clear();
+			listAtlasRegionPackedTextures.Clear();
+
+
+		}
+
+	
+
+
+		private static List<Texture2D> listPackedTextures = new();
+		private static Dictionary<AtlasRegion, Texture2D> listAtlasRegionPackedTextures = new();
 
 		private static void AddRegionTexturesToPack(int numTextureParamsToRepack, AtlasRegion region,
 			TextureFormat textureFormat, bool mipmaps, TextureFormat[] additionalTextureFormats,
@@ -527,12 +598,21 @@ namespace Spine.Unity.AttachmentTools
 
 			for (int i = 0; i < numTextureParamsToRepack; ++i)
 			{
-				Texture2D regionTexture = (i == 0 ?
-					region.ToTexture(textureFormat, mipmaps) :
-					region.ToTexture((additionalTextureFormats != null && i - 1 < additionalTextureFormats.Length) ?
-						additionalTextureFormats[i - 1] : textureFormat,
-						mipmaps, additionalTexturePropertyIDsToCopy[i - 1], additionalTextureIsLinear[i - 1]));
-				texturesToPackAtParam[i].Add(regionTexture);
+				// Texture2D regionTexture = (i == 0 ?
+				// 	region.ToTexture(textureFormat, mipmaps) :
+				// 	region.ToTexture((additionalTextureFormats != null && i - 1 < additionalTextureFormats.Length) ?
+				// 		additionalTextureFormats[i - 1] : textureFormat,
+				// 		mipmaps, additionalTexturePropertyIDsToCopy[i - 1], additionalTextureIsLinear[i - 1]));
+				// texturesToPackAtParam[i].Add(regionTexture);
+
+
+				var mainTexture = region.GetMainTexture();
+				if (!listPackedTextures.Contains(mainTexture))
+				{
+					listPackedTextures.Add(mainTexture);
+					texturesToPackAtParam[i].Add(mainTexture);
+				}
+				listAtlasRegionPackedTextures.Add(region, mainTexture);
 			}
 		}
 
@@ -612,6 +692,7 @@ namespace Spine.Unity.AttachmentTools
 				Attachment newAttachment = inoutAttachments[i++];
 				newSkin.SetAttachment(originalSkinEntry.SlotIndex, originalSkinEntry.Name, newAttachment);
 			}
+			ClearSpineCache();
 			return newSkin;
 		}
 
