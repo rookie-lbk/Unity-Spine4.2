@@ -6,6 +6,7 @@ using Spine.Unity;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public partial class PlayerCtrl : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public partial class PlayerCtrl : MonoBehaviour
     private AIPath aiPath;
 
     [SerializeField]
-    private TextMeshProUGUI textMeshProUGUI;
+    private Text infoText;
 
     [Header("Movement Detection")]
     public float movementTolerance = 0.01f; // 移动检测的误差值
@@ -46,13 +47,13 @@ public partial class PlayerCtrl : MonoBehaviour
     void Update()
     {
         float distance = aiPath.remainingDistance - aiPath.endReachedDistance;
-        if (textMeshProUGUI != null)
+        if (infoText != null)
         {
-            textMeshProUGUI.text = distance.ToString();
+            var pos = aiPath.steeringTarget;
+            infoText.text = $"pos: {pos.x}, {pos.y}, {pos.z}\n" + $"distance: {distance}";
         }
 
         // 使用误差值检测位置变化
-        // if (Vector3.Distance(transform.position, lastPosition) > movementTolerance)
         if (distance > movementTolerance)
         {
             Vector2Int newGridPosition = GetGridPositionFromTransform();
@@ -62,11 +63,12 @@ public partial class PlayerCtrl : MonoBehaviour
                 currentGridPosition = newGridPosition;
                 OnGridPositionChanged(currentGridPosition);
             }
-            lastPosition = transform.position;
+            // lastPosition = transform.position;
+            lastPosition = aiPath.steeringTarget;
         }
         else
         {
-            currentGridPosition = Vector2Int.zero;
+            // currentGridPosition = Vector2Int.zero;
             animator.SetBool("Walking", false);
         }
     }
@@ -77,14 +79,23 @@ public partial class PlayerCtrl : MonoBehaviour
     /// <returns>网格坐标 (x, y)</returns>
     public Vector2Int GetGridPositionFromTransform()
     {
+        var pos = aiPath.steeringTarget;
+        // pos = transform.position;
+        if (Vector3.Distance(pos, lastPosition) < 0.01f)
+        {
+            return currentGridPosition;
+        }
+
         // 将世界坐标转换为网格坐标
-        int x = NormalizeToUnitWithThreshold(transform.position.x - lastPosition.x);
-        int y = NormalizeToUnitWithThreshold(transform.position.y - lastPosition.y);
+        float distanceX = pos.x - lastPosition.x;
+        float distanceY = pos.y - lastPosition.y;
+        int x = NormalizeToUnitWithThreshold(distanceX);
+        int y = NormalizeToUnitWithThreshold(distanceY);
 
         return new Vector2Int(x, y);
     }
 
-    private int NormalizeToUnitWithThreshold(float value, float threshold = 0.001f)
+    private int NormalizeToUnitWithThreshold(float value, float threshold = 0.01f)
     {
         if (Mathf.Abs(value) < threshold)
             return 0;

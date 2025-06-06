@@ -255,7 +255,7 @@ MonoBehaviour:
     sensitivity: 10
     maximumPeriod: 2
     visualizeSensitivity: 0
-  maxAcceleration: 10
+  maxAcceleration: 1000
   rotationSpeed: 360
   slowdownDistance: 0
   pickNextWaypointDist: 0.1
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1740105097035050149}
-  textMeshProUGUI: {fileID: 0}
+  infoText: {fileID: 0}
   movementTolerance: 0.01
   skinNames:
   - color/color_0
