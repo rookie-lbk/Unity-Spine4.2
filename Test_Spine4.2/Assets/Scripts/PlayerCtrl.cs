@@ -99,12 +99,12 @@ public partial class PlayerCtrl : MonoBehaviour
     {
         Debug.Log($"Grid Position Changed: ({newGridPosition.x}, {newGridPosition.y})");
 
-        // 检查是否需要翻转动画（右、左上、右下）
-        HandleSpineFlip(newGridPosition);
-
         // 在这里可以添加其他逻辑，比如触发事件、更新UI等
         animator.SetFloat("X", newGridPosition.x);
         animator.SetFloat("Y", newGridPosition.y);
+
+        // 检查是否需要翻转动画（右、左上、右下）
+        HandleSpineFlip(newGridPosition);
     }
 
     /// <summary>
@@ -122,11 +122,11 @@ public partial class PlayerCtrl : MonoBehaviour
         {
             shouldFlip = true;
         }
-        else if (direction.x == -1 && direction.y == 1) // 左上
+        else if (direction.x == 1 && direction.y == 1) // 左上
         {
             shouldFlip = true;
         }
-        else if (direction.x == 1 && direction.y == -1) // 右下
+        else if (direction.x == 1 && direction.y == -1) // 左下
         {
             shouldFlip = true;
         }
