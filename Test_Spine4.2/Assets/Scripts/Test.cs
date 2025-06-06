@@ -72,11 +72,14 @@ public class Test : MonoBehaviour
         if (runtimeAtlas)
             Destroy(runtimeAtlas);
 
-        var skinMixTmp = skinMix.GetRepackedSkin("RepackedSkin", skeletonAnimation.SkeletonDataAsset.atlasAssets[0].PrimaryMaterial, out runtimeMaterial, out runtimeAtlas, maxAtlasSize: 2048);
+        Material material = skeletonAnimation.SkeletonDataAsset.atlasAssets[0].PrimaryMaterial;
+        TextureFormat textureFormat = (material.mainTexture as Texture2D).format;
+        Debug.Log("textureFormat: " + textureFormat);
+        var skinMixTmp = skinMix.GetRepackedSkin("RepackedSkin", material, out runtimeMaterial, out runtimeAtlas, textureFormat: textureFormat);
         skinMix.Clear();
 
         skeletonAnimation.Skeleton.Skin = skinMixTmp;
-        // skeleton.SetSkin(skinMixTmp);
+        skeleton.SetSkin(skinMixTmp);
         // skeleton.SetSkin(skinMix);
 
         skeleton.UpdateCache();
@@ -93,16 +96,18 @@ public class Test : MonoBehaviour
         Atlas atlas = spineAtlasAsset.GetAtlas();
         foreach (var region in atlas.Regions)
         {
-            // Debug.Log("111 region.name: " + region.name);
-            SlotData slotData = skeleton.Data.FindSlot(region.name);
+            Debug.Log("111 region.name: " + region.name);
+            // string slotName = region.name.Split("/")[1];
+            string slotName = region.name;
+            SlotData slotData = skeleton.Data.FindSlot(slotName);
             if (slotData != null)
             {
-                // Debug.Log("222 slotData.Name: " + slotData.Name + " slotData.Index: " + slotData.Index);
+                Debug.Log("222 slotData.Name: " + slotData.Name + " slotData.Index: " + slotData.Index);
                 string attachmentName = region.name;
                 Attachment attachment = skinMix.GetAttachment(slotData.Index, attachmentName);
                 if (attachment != null)
                 {
-                    // Debug.Log("333 attachment: " + attachment);
+                    Debug.Log("333 attachment: " + attachment);
                     Attachment newAttachment = attachment.GetRemappedClone(region, true, true, scale);
                     skinMix.SetAttachment(slotData.Index, attachmentName, newAttachment);
                 }

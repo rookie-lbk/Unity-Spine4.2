@@ -45,9 +45,6 @@ offsets:0,0,57,94
 f_color_0/body_4_0
 bounds:444,107,58,93
 offsets:0,1,58,95
-f_color_0/head_0_0
-bounds:377,4,77,95
-offsets:1,0,79,96
 f_color_0/head_1_0
 bounds:456,13,77,92
 offsets:0,0,77,93
@@ -89,3 +86,6 @@ bounds:126,88,27,112
 f_color_0/leg_4_1
 bounds:155,88,27,112
 offsets:1,0,29,112
+head_base
+bounds:377,4,77,95
+offsets:1,0,79,96
