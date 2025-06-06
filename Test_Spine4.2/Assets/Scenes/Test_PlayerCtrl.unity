@@ -8613,8 +8613,8 @@ MonoBehaviour:
   tagNames: []
   heuristic: 0
   heuristicScale: 1
-  threadCount: 0
-  maxFrameTime: 1
+  threadCount: 1
+  maxFrameTime: 10
   batchGraphUpdates: 0
   graphUpdateBatchingInterval: 0.2
   navmeshUpdates:
@@ -8714,7 +8714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 8190612848417280234, guid: deb0075833edf184ea639e7ba96d0b21, type: 3}
-  playerCountText: {fileID: 1625131155}
+  infoText: {fileID: 1625131155}
 --- !u!1 &1069748346
 GameObject:
   m_ObjectHideFlags: 0
@@ -13146,7 +13146,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 20, y: 90}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 304.5002, y: 140.1697}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1625131155
 MonoBehaviour:
@@ -13170,10 +13170,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 5
+    m_MinSize: 4
     m_MaxSize: 50
     m_Alignment: 6
     m_AlignByGeometry: 0
