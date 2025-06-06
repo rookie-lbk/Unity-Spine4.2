@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4602690246220589631
+--- !u!1 &763356694247398599
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 244612580534322674}
-  - component: {fileID: 3304391939577100960}
-  - component: {fileID: 479876441186115750}
-  - component: {fileID: 6712518426129497039}
-  - component: {fileID: 8157796354646913280}
+  - component: {fileID: 6304857889813203622}
+  - component: {fileID: 1470112192991849327}
+  - component: {fileID: 1025655551540428945}
+  - component: {fileID: 1740105097035050149}
+  - component: {fileID: 1447803859058411243}
   m_Layer: 0
-  m_Name: Spine Mecanim GameObject (FootSoldier)
+  m_Name: Spine Mecanim GameObject (CharacterBase)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &244612580534322674
+--- !u!4 &6304857889813203622
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4602690246220589631}
+  m_GameObject: {fileID: 763356694247398599}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8145910515781818443}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3304391939577100960
+--- !u!33 &1470112192991849327
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4602690246220589631}
+  m_GameObject: {fileID: 763356694247398599}
   m_Mesh: {fileID: 0}
---- !u!23 &479876441186115750
+--- !u!23 &1025655551540428945
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4602690246220589631}
+  m_GameObject: {fileID: 763356694247398599}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5a3598dafa118754db95756064347da7, type: 2}
+  - {fileID: 2100000, guid: 9e5a7aaf81161b0489f870d5a11ba95e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,17 +85,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &6712518426129497039
+--- !u!95 &1740105097035050149
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4602690246220589631}
+  m_GameObject: {fileID: 763356694247398599}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 38e5e02fa835a924e9b37ec4c13cfb9d, type: 2}
+  m_Controller: {fileID: 9100000, guid: d9be538b520437649a0ec34cf1935bff, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -106,20 +106,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8157796354646913280
+--- !u!114 &1447803859058411243
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4602690246220589631}
+  m_GameObject: {fileID: 763356694247398599}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9db98c60740638449864eb028fbe7ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: e57cdb51287d3924ebb2ececf816733b, type: 2}
-  initialSkinName: White
+  skeletonDataAsset: {fileID: 11400000, guid: 3584add5b5944c745814ffd9cb498f7c, type: 2}
+  initialSkinName: color/color_0
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -185,7 +185,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5486711148360444908}
-  - {fileID: 244612580534322674}
+  - {fileID: 6304857889813203622}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3418472433638191445
@@ -302,12 +302,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc56475503cb79e42a2d6e8ba2fbfc78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 6712518426129497039}
+  animator: {fileID: 1740105097035050149}
   textMeshProUGUI: {fileID: 0}
   movementTolerance: 0.01
-  skinNames: []
-  skinAssets: []
-  isRepackSkin: 0
+  skinNames:
+  - color/color_0
+  - hair/hair_0
+  skinAssets:
+  - {fileID: 11400000, guid: b88aaa0c90095a549ac5c6cedf44ec1f, type: 2}
+  - {fileID: 11400000, guid: 1f64e6c024911a24b90616afa8de8f48, type: 2}
+  isRepackSkin: 1
   runtimeAtlas: {fileID: 0}
   runtimeMaterial: {fileID: 0}
 --- !u!1 &8902373984957771551

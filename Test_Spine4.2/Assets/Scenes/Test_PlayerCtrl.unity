@@ -13993,9 +13993,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3304391939577100960, guid: deb0075833edf184ea639e7ba96d0b21, type: 3}
+    - target: {fileID: 1025655551540428945, guid: deb0075833edf184ea639e7ba96d0b21, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9e5a7aaf81161b0489f870d5a11ba95e, type: 2}
+    - target: {fileID: 1470112192991849327, guid: deb0075833edf184ea639e7ba96d0b21, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789681367778112489, guid: deb0075833edf184ea639e7ba96d0b21, type: 3}
+      propertyPath: maxAcceleration
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 7098056036488788935, guid: deb0075833edf184ea639e7ba96d0b21, type: 3}
       propertyPath: target
@@ -14003,11 +14011,11 @@ PrefabInstance:
       objectReference: {fileID: 1427648482}
     - target: {fileID: 8145910515781818443, guid: deb0075833edf184ea639e7ba96d0b21, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.267
+      value: -2.76
       objectReference: {fileID: 0}
     - target: {fileID: 8145910515781818443, guid: deb0075833edf184ea639e7ba96d0b21, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.531
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8145910515781818443, guid: deb0075833edf184ea639e7ba96d0b21, type: 3}
       propertyPath: m_LocalPosition.z

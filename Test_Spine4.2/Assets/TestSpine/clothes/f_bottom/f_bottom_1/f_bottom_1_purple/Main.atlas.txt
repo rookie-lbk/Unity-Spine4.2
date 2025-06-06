@@ -1,0 +1,17 @@
+Main.png
+size:560,212
+filter:Linear,Linear
+bottom_1_0_0
+bounds:449,20,108,192
+offsets:2,0,110,192
+bottom_1_1_0
+bounds:0,9,119,203
+bottom_1_2_0
+bounds:234,0,104,212
+offsets:0,0,104,215
+bottom_1_3_0
+bounds:121,6,111,206
+offsets:4,1,115,207
+bottom_1_4_0
+bounds:340,13,107,199
+offsets:1,0,110,199
