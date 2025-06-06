@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Wall
   - 
   - 
   - 
@@ -40,4 +40,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Deck_B1
+    uniqueID: 2091968087
+    locked: 0
+  - name: BetweenDecks
+    uniqueID: 1113902581
+    locked: 0
+  - name: Deck_F1
+    uniqueID: 981365133
+    locked: 0
+  - name: DeckUp
+    uniqueID: 2117707227
+    locked: 0
+  - name: Tiles
+    uniqueID: 1674895273
+    locked: 0
+  - name: OverTiles
+    uniqueID: 4195264599
     locked: 0
