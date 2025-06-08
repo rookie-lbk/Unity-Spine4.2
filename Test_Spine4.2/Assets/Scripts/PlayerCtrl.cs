@@ -49,7 +49,7 @@ public partial class PlayerCtrl : MonoBehaviour
         float distance = aiPath.remainingDistance - aiPath.endReachedDistance;
         if (infoText != null)
         {
-            var pos = aiPath.steeringTarget;
+            var pos = transform.position;
             infoText.text = $"pos: {pos.x}, {pos.y}, {pos.z}\n" + $"distance: {distance}";
         }
 
@@ -63,8 +63,7 @@ public partial class PlayerCtrl : MonoBehaviour
                 currentGridPosition = newGridPosition;
                 OnGridPositionChanged(currentGridPosition);
             }
-            // lastPosition = transform.position;
-            lastPosition = aiPath.steeringTarget;
+            lastPosition = transform.position;
         }
         else
         {
@@ -79,8 +78,7 @@ public partial class PlayerCtrl : MonoBehaviour
     /// <returns>网格坐标 (x, y)</returns>
     public Vector2Int GetGridPositionFromTransform()
     {
-        var pos = aiPath.steeringTarget;
-        // pos = transform.position;
+        var pos = transform.position;
         if (Vector3.Distance(pos, lastPosition) < 0.01f)
         {
             return currentGridPosition;
@@ -89,13 +87,15 @@ public partial class PlayerCtrl : MonoBehaviour
         // 将世界坐标转换为网格坐标
         float distanceX = pos.x - lastPosition.x;
         float distanceY = pos.y - lastPosition.y;
-        int x = NormalizeToUnitWithThreshold(distanceX);
-        int y = NormalizeToUnitWithThreshold(distanceY);
+        int x = math.abs(distanceY / distanceX) > 2 ? 0 : NormalizeToUnitWithThreshold(distanceX);
+        int y = math.abs(distanceX / distanceY) > 2 ? 0 : NormalizeToUnitWithThreshold(distanceY);
+
+        Debug.Log($"distance: ({pos.x}, {pos.y}) ({distanceX}, {distanceY})");
 
         return new Vector2Int(x, y);
     }
 
-    private int NormalizeToUnitWithThreshold(float value, float threshold = 0.01f)
+    private int NormalizeToUnitWithThreshold(float value, float threshold = 0.005f)
     {
         if (Mathf.Abs(value) < threshold)
             return 0;
