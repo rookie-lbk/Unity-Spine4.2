@@ -90,7 +90,7 @@ public partial class PlayerCtrl : MonoBehaviour
         int x = math.abs(distanceY / distanceX) > 2 ? 0 : NormalizeToUnitWithThreshold(distanceX);
         int y = math.abs(distanceX / distanceY) > 2 ? 0 : NormalizeToUnitWithThreshold(distanceY);
 
-        Debug.Log($"distance: ({pos.x}, {pos.y}) ({distanceX}, {distanceY})");
+        // Debug.Log($"distance: ({pos.x}, {pos.y}) ({distanceX}, {distanceY})");
 
         return new Vector2Int(x, y);
     }
@@ -108,7 +108,7 @@ public partial class PlayerCtrl : MonoBehaviour
     /// <param name="newGridPosition">新的网格位置</param>
     private void OnGridPositionChanged(Vector2Int newGridPosition)
     {
-        Debug.Log($"Grid Position Changed: ({newGridPosition.x}, {newGridPosition.y})");
+        // Debug.Log($"Grid Position Changed: ({newGridPosition.x}, {newGridPosition.y})");
 
         // 在这里可以添加其他逻辑，比如触发事件、更新UI等
         animator.SetFloat("X", newGridPosition.x);

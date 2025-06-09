@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9e5a7aaf81161b0489f870d5a11ba95e, type: 2}
+  - {fileID: 2100000, guid: 12bb8349dea9cf241876851e4e32cf55, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -305,12 +305,56 @@ MonoBehaviour:
   animator: {fileID: 1740105097035050149}
   infoText: {fileID: 0}
   movementTolerance: 0.01
-  skinNames:
-  - color/color_0
-  - hair/hair_0
-  skinAssets:
-  - {fileID: 11400000, guid: b88aaa0c90095a549ac5c6cedf44ec1f, type: 2}
-  - {fileID: 11400000, guid: 1f64e6c024911a24b90616afa8de8f48, type: 2}
+  defaultSkinName: color/color_0
+  defaultSkinAsset: {fileID: 11400000, guid: b88aaa0c90095a549ac5c6cedf44ec1f, type: 2}
+  skinDataLists:
+  - skinDatas:
+    - skinName: bottom/bottom_0
+      skinAsset: {fileID: 11400000, guid: c9da756691d8fae44be042d54851e88f, type: 2}
+    - skinName: bottom/bottom_0
+      skinAsset: {fileID: 11400000, guid: 3b64269dbf2274941bf909a7306768f8, type: 2}
+    - skinName: bottom/bottom_0
+      skinAsset: {fileID: 11400000, guid: d1bf912e8ad78bf46aba49ad3c17b6f9, type: 2}
+    - skinName: bottom/bottom_1
+      skinAsset: {fileID: 11400000, guid: c68136f8bb0717c4bbe393b411b07f0e, type: 2}
+    - skinName: bottom/bottom_1
+      skinAsset: {fileID: 11400000, guid: a9a644d4be85f234b8bd328ec89c7772, type: 2}
+    - skinName: bottom/bottom_1
+      skinAsset: {fileID: 11400000, guid: f47ec0d4501497141970a6cd26bdd86e, type: 2}
+    - skinName: bottom/bottom_2
+      skinAsset: {fileID: 11400000, guid: af9dce674f8f2c845a13b0234fe7b8f8, type: 2}
+    - skinName: bottom/bottom_2
+      skinAsset: {fileID: 11400000, guid: 1d7c28c7fb595f6428d91764efdc1f26, type: 2}
+    - skinName: bottom/bottom_2
+      skinAsset: {fileID: 11400000, guid: 4a4e688ef3925cc47943a9405abe0f89, type: 2}
+  - skinDatas:
+    - skinName: color/color_0
+      skinAsset: {fileID: 11400000, guid: 8ec60fc2b84bc7948b062266201c5fa1, type: 2}
+    - skinName: color/color_0
+      skinAsset: {fileID: 11400000, guid: b0225b6f91a9d9b43b7c93f3bd189112, type: 2}
+  - skinDatas:
+    - skinName: hair/hair_0
+      skinAsset: {fileID: 11400000, guid: 1f64e6c024911a24b90616afa8de8f48, type: 2}
+    - skinName: hair/hair_0
+      skinAsset: {fileID: 11400000, guid: 98441df1a340900419bfe23676a7e4bc, type: 2}
+    - skinName: hair/hair_1
+      skinAsset: {fileID: 11400000, guid: 4f65c2a20bb60454b850814caf975d86, type: 2}
+    - skinName: hair/hair_1
+      skinAsset: {fileID: 11400000, guid: 7bd6bd4354d532140a7cb214d028bf90, type: 2}
+  - skinDatas:
+    - skinName: shoe/shoe_0
+      skinAsset: {fileID: 11400000, guid: eed2fb2c32020d549af693f94fea80e7, type: 2}
+    - skinName: shoe/shoe_0
+      skinAsset: {fileID: 11400000, guid: adf633a2867a5554c9594330bf6a1871, type: 2}
+    - skinName: shoe/shoe_1
+      skinAsset: {fileID: 11400000, guid: 5a8fe6b2c27eb8b459d9ed87c19e26d6, type: 2}
+    - skinName: shoe/shoe_1
+      skinAsset: {fileID: 11400000, guid: 3b564058f94662b46a1ab5fc0ba803a1, type: 2}
+  - skinDatas:
+    - skinName: top/top_0
+      skinAsset: {fileID: 11400000, guid: e4d7be3a1fed3a74c98d6d5952098011, type: 2}
+    - skinName: top/top_0
+      skinAsset: {fileID: 11400000, guid: c4d9b11eb5c286c4c999a9bc679979a6, type: 2}
   isRepackSkin: 1
   runtimeAtlas: {fileID: 0}
   runtimeMaterial: {fileID: 0}

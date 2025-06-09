@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Spine;
@@ -6,14 +6,30 @@ using Spine.Unity;
 using Spine.Unity.AttachmentTools;
 using UnityEngine;
 
+[Serializable]
+public class SkinData
+{
+    [SpineSkin]
+    public string skinName;
+    public SpineAtlasAsset skinAsset;
+}
+
+[Serializable]
+public class SkinDataList
+{
+    public List<SkinData> skinDatas = new List<SkinData>();
+}
+
 public partial class PlayerCtrl
 {
-
     [SpineSkin]
-    public string[] skinNames = null;
-    public SpineAtlasAsset[] skinAssets = null;
+    public string defaultSkinName = null;
+    public SpineAtlasAsset defaultSkinAsset = null;
 
-    public bool isRepackSkin = false;
+    [SerializeField]
+    private List<SkinDataList> skinDataLists = new List<SkinDataList>();
+
+    public bool isRepackSkin = true;
     public Texture2D runtimeAtlas;
     public Material runtimeMaterial;
 
@@ -22,16 +38,23 @@ public partial class PlayerCtrl
     private void ChangeSkin()
     {
         Skin skinMix = new Skin("skin-mix");
-        if (skinNames.Length == 0)
+
+        if (defaultSkinName != null)
         {
-            return;
+            Skin defaultSkin = skeleton.Data.FindSkin(defaultSkinName);
+            SetSpineAtlasAsset(defaultSkinAsset, defaultSkin);
+            skinMix.CopySkin(defaultSkin);
         }
-        for (int i = 0; i < skinNames.Length; i++)
+
+        foreach (var skinDataList in skinDataLists)
         {
-            Skin addSkin = skeleton.Data.FindSkin(skinNames[i]);
-            SetSpineAtlasAsset(skinAssets[i], addSkin);
-            // skinMix.AddSkin(addSkin);
-            skinMix.CopySkin(addSkin);
+            if (skinDataList.skinDatas.Count > 0)
+            {
+                var skinData = skinDataList.skinDatas[UnityEngine.Random.Range(0, skinDataList.skinDatas.Count)];
+                Skin addSkin = skeleton.Data.FindSkin(skinData.skinName);
+                SetSpineAtlasAsset(skinData.skinAsset, addSkin);
+                skinMix.CopySkin(addSkin);
+            }
         }
 
         if (runtimeMaterial)
